@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "migrations:add": "echo 'Migration name'&& read migration_name && knex migrate:make $migration_name --knexfile=.knexfile.js",
+    "migrations:migrate":"knex migrate:latest --knexfile=.knexfile.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +15,8 @@
     "nodemon": "^2.0.20"
   },
   "dependencies": {
-    "Express": "^3.0.1"
+    "Express": "^3.0.1",
+    "knex": "^2.3.0",
+    "mysql2": "^2.3.3"
   }
 }

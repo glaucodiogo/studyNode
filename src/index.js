@@ -10,13 +10,21 @@ const errorHandler = require('./middlewares/error')
 const app = express()
 const router = express.Router()
 
-app.use(errorHandler())
+router.use(express.json())
+router.use(logger())
+router.use('/hello', hello)
+router.use('/todos', todos)
+router.use('/users', users)
 
-app.use('/api',router)
+router.use(errorHandler())
 
-app.listen(3000,'0.0.0.0',() =>{
-  console.log('server started')
-}).once('error', () => {
-  console.error(error);
-  process.exit(1);
-})
+app.use('/api', router)
+
+app
+  .listen(3000, '0.0.0.0', () => {
+    console.log('Server started')
+  })
+  .once('error', (error) => {
+    console.error(error)
+    process.exit(1)
+  })
