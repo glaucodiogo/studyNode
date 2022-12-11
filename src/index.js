@@ -19,9 +19,37 @@ const server = http.createServer((request,response) => {
 
   if(request.method === 'POST' && request.url.startsWith('/echo')){
       response.writeHead(200, {'Content-Type': 'application/json'});
-
       return
   }
+
+//POST /todos {"text":string , "title":string}
+  if(request.method === 'POST' && request.url.startsWith('/todos')){
+    let bodyRaw = '';
+
+    request.on('data',data => bodyraw += data)
+
+    request.on('once',() =>{
+      const todo = JSON.parse(bodyRaw);
+      todosDatabase.insert(todo)
+        .then(inserted => {
+            response.writeHead(201, {'Content-Type': 'application/json'})
+            response.end(JSON.stringify(todo));
+        })
+    })
+
+    return
+  }
+
+//API todos
+/*
+-- POST /todos
+-- GET /todos/
+-- GET /todos/:id
+-- DELETE /todos/:id
+-- PUT /todos/:id
+
+*/
+
 })
 
 server.listen(3000,"0.0.0.0",()=>{
