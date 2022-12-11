@@ -19,7 +19,7 @@ const InMemoryUsersRepository = () => {
 
   const get = async (id) => {
     await wait(100)
-    return users[id]
+    return users[id] ?? Promise.reject
   }
 
   const update = async (user) => {
